@@ -1,0 +1,1500 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Lava Rapido API",
+    "description": "API do banco de dados",
+    "version": "1.0.0"
+  },
+  "host": "localhost:3000",
+  "basePath": "/",
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/": {
+      "get": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/servicos/": {
+      "get": {
+        "description": "Busca todos os serviços",
+        "responses": {
+          "200": {
+            "description": "Retorna lista de serviços",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "servico_id": {
+                    "type": "number",
+                    "example": 1
+                  },
+                  "nome": {
+                    "type": "string",
+                    "example": "nome do servico"
+                  },
+                  "descricao": {
+                    "type": "string",
+                    "example": "descricao do servico"
+                  },
+                  "valor_base": {
+                    "type": "number",
+                    "example": 20
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "description": "Cria um servico",
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "nome": {
+                  "type": "string",
+                  "example": "nome do servico"
+                },
+                "descricao": {
+                  "type": "string",
+                  "example": "descricao do servico"
+                },
+                "valor_base": {
+                  "type": "number",
+                  "example": 20
+                }
+              },
+              "required": [
+                "nome",
+                "descricao",
+                "valor_base"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Registro criado com sucesso",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "success"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "Registro criado com sucesso."
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/servicos/{id}": {
+      "get": {
+        "description": "Busca um serviço",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retorna um serviço",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "servico_id": {
+                  "type": "number",
+                  "example": 1
+                },
+                "nome": {
+                  "type": "string",
+                  "example": "nome do servico"
+                },
+                "descricao": {
+                  "type": "string",
+                  "example": "descricao do servico"
+                },
+                "valor_base": {
+                  "type": "number",
+                  "example": 20
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "description": "Edita um servico",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "obj",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "nome": {
+                  "type": "string",
+                  "example": "nome do servico"
+                },
+                "descricao": {
+                  "type": "string",
+                  "example": "descricao do servivo"
+                },
+                "valor_base": {
+                  "type": "number",
+                  "example": 20
+                },
+                "servico_id": {
+                  "type": "number",
+                  "example": 1
+                }
+              },
+              "required": [
+                "nome",
+                "descricao",
+                "valor_base",
+                "servico_id"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Registro atualizado com sucesso",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "success"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "Registro atualizado com sucesso."
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "description": "Deleta um servico",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "servico deletado",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "success"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "Registro deletado com sucesso."
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/clientes/": {
+      "get": {
+        "description": "Busca todos os clientes",
+        "responses": {
+          "200": {
+            "description": "Retorna lista de clientes",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "cliente_id": {
+                    "type": "number",
+                    "example": 1
+                  },
+                  "nome": {
+                    "type": "string",
+                    "example": "nome do cliente"
+                  },
+                  "cpf": {
+                    "type": "string",
+                    "example": "000.000.000-00"
+                  },
+                  "telefone": {
+                    "type": "string",
+                    "example": "8500000000"
+                  },
+                  "enderco": {
+                    "type": "string",
+                    "example": "nome do endereco"
+                  },
+                  "email": {
+                    "type": "string",
+                    "example": "email@email.com"
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "description": "Cria um cliente",
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "nome": {
+                  "type": "string",
+                  "example": "nome do cliente"
+                },
+                "cpf": {
+                  "type": "string",
+                  "example": "000.000.000-00"
+                },
+                "telefone": {
+                  "type": "string",
+                  "example": "8500000000"
+                },
+                "enderco": {
+                  "type": "string",
+                  "example": "nome do endereco"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "email@email.com"
+                }
+              },
+              "required": [
+                "nome",
+                "cpf",
+                "telefone",
+                "enderco",
+                "email"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Registro criado com sucesso",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "success"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "Registro criado com sucesso."
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/clientes/{id}": {
+      "get": {
+        "description": "Busca um cliente",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retorna um cliente",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "cliente_id": {
+                  "type": "number",
+                  "example": 1
+                },
+                "nome": {
+                  "type": "string",
+                  "example": "nome do cliente"
+                },
+                "cpf": {
+                  "type": "string",
+                  "example": "000.000.000-00"
+                },
+                "telefone": {
+                  "type": "string",
+                  "example": "8500000000"
+                },
+                "enderco": {
+                  "type": "string",
+                  "example": "nome do endereco"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "email@email.com"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "description": "Edita um cliente",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "obj",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "cliente_id": {
+                  "type": "number",
+                  "example": 1
+                },
+                "nome": {
+                  "type": "string",
+                  "example": "nome do cliente"
+                },
+                "cpf": {
+                  "type": "string",
+                  "example": "000.000.000-00"
+                },
+                "telefone": {
+                  "type": "string",
+                  "example": "8500000000"
+                },
+                "enderco": {
+                  "type": "string",
+                  "example": "nome do endereco"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "email@email.com"
+                }
+              },
+              "required": [
+                "cliente_id",
+                "nome",
+                "cpf",
+                "telefone",
+                "enderco",
+                "email"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Registro atualizado com sucesso",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "success"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "Registro atualizado com sucesso."
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "description": "Deleta um cliente",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Registro deletado",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "success"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "Registro deletado com sucesso."
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/veiculos/": {
+      "get": {
+        "description": "Busca todos os veiculos",
+        "responses": {
+          "200": {
+            "description": "Retorna lista de veiculos",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "veiculo_id": {
+                    "type": "number",
+                    "example": 2
+                  },
+                  "cliente_id": {
+                    "type": "string",
+                    "example": "nome do cliente"
+                  },
+                  "placa": {
+                    "type": "string",
+                    "example": "identificacao da placa"
+                  },
+                  "modelo": {
+                    "type": "string",
+                    "example": "modelo do veiculo"
+                  },
+                  "cor": {
+                    "type": "string",
+                    "example": "cor do veiculo"
+                  },
+                  "ano": {
+                    "type": "number",
+                    "example": 2025
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "description": "Cria um veiculo",
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "cliente_id": {
+                  "type": "number",
+                  "example": 1
+                },
+                "placa": {
+                  "type": "string",
+                  "example": "identificacao da placa"
+                },
+                "modelo": {
+                  "type": "string",
+                  "example": "modelo do veiculo"
+                },
+                "cor": {
+                  "type": "string",
+                  "example": "cor do veiculo"
+                },
+                "ano": {
+                  "type": "number",
+                  "example": 2025
+                }
+              },
+              "required": [
+                "cliente_id",
+                "placa",
+                "modelo",
+                "cor",
+                "ano"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Veiculo criado com sucesso",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "success"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "Veiculo criado com sucesso."
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/veiculos/{id}": {
+      "get": {
+        "description": "Busca um veiculo",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retorna um veiculo",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "veiculo_id": {
+                  "type": "number",
+                  "example": 2
+                },
+                "cliente_id": {
+                  "type": "number",
+                  "example": 2
+                },
+                "placa": {
+                  "type": "string",
+                  "example": "pma0987"
+                },
+                "modelo": {
+                  "type": "string",
+                  "example": "corolla"
+                },
+                "cor": {
+                  "type": "string",
+                  "example": "preto"
+                },
+                "ano": {
+                  "type": "number",
+                  "example": 2025
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "description": "Edita um veiculo",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "obj",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "cliente_id": {
+                  "type": "number",
+                  "example": 2
+                },
+                "placa": {
+                  "type": "string",
+                  "example": "identificacao da placa"
+                },
+                "modelo": {
+                  "type": "string",
+                  "example": "modelo do veiculo"
+                },
+                "cor": {
+                  "type": "string",
+                  "example": "cor do veiculo"
+                },
+                "ano": {
+                  "type": "number",
+                  "example": 2025
+                }
+              },
+              "required": [
+                "cliente_id",
+                "placa",
+                "modelo",
+                "cor",
+                "ano"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Veiculo atualizado com sucesso",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "success"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "Veiculo atualizado com sucesso."
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "description": "Deleta um veiculo",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "registro deletado",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "success"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "Registro deletado com sucesso."
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/itens/": {
+      "get": {
+        "description": "Busca todos os itens da ordem de servico",
+        "responses": {
+          "200": {
+            "description": "Retorna lista de itens da ordem de servico",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "itens_os_id": {
+                    "type": "number",
+                    "example": 1
+                  },
+                  "os_id": {
+                    "type": "number",
+                    "example": 1
+                  },
+                  "servico_id": {
+                    "type": "number",
+                    "example": 1
+                  },
+                  "quantidade": {
+                    "type": "number",
+                    "example": 1
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "description": "Cria um item da ordem de servico",
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "os_id": {
+                  "type": "number",
+                  "example": 1
+                },
+                "servico_id": {
+                  "type": "number",
+                  "example": 1
+                },
+                "quantidade": {
+                  "type": "number",
+                  "example": 1
+                }
+              },
+              "required": [
+                "os_id",
+                "servico_id",
+                "quantidade"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Registro criado com sucesso",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "success"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "Registro criado com sucesso."
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/itens/{id}": {
+      "get": {
+        "description": "Busca um item da ordem de servico",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retorna um item da ordem de servico",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "itens_os_id": {
+                  "type": "number",
+                  "example": 1
+                },
+                "os_id": {
+                  "type": "number",
+                  "example": 1
+                },
+                "servico_id": {
+                  "type": "number",
+                  "example": 1
+                },
+                "quantidade": {
+                  "type": "number",
+                  "example": 1
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "description": "Edita um item da ordem de servico",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "obj",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "os_id": {
+                  "type": "number",
+                  "example": 1
+                },
+                "servico_id": {
+                  "type": "number",
+                  "example": 1
+                },
+                "quantidade": {
+                  "type": "number",
+                  "example": 1
+                }
+              },
+              "required": [
+                "os_id",
+                "servico_id",
+                "quantidade"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Registro atualizado com sucesso",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "success"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "Registro atualizado com sucesso."
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "description": "Deleta um item da ordem de servico",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Registro deletado",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "success"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "Registro deletado com sucesso."
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/os/": {
+      "get": {
+        "description": "Busca todos os servicos",
+        "responses": {
+          "200": {
+            "description": "Retorna lista de servicos",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "os_id": {
+                    "type": "number",
+                    "example": 1
+                  },
+                  "cliente_id": {
+                    "type": "number",
+                    "example": 1
+                  },
+                  "veiculo_id": {
+                    "type": "number",
+                    "example": 1
+                  },
+                  "data_abertura": {
+                    "type": "string",
+                    "example": "2025-10-25 12:00:01"
+                  },
+                  "data_fechamento": {
+                    "type": "string",
+                    "example": "2025-10-25 12:00:01"
+                  },
+                  "status": {
+                    "type": "string",
+                    "example": ""
+                  },
+                  "valor_total": {
+                    "type": "number",
+                    "example": 39.9
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "description": "Cria uma ordem de servico",
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "cliente_id": {
+                  "type": "number",
+                  "example": 1
+                },
+                "veiculo_id": {
+                  "type": "number",
+                  "example": 1
+                },
+                "data_abertura": {
+                  "type": "string",
+                  "example": "2025-10-25 12:00:01"
+                },
+                "data_fechamento": {
+                  "type": "string",
+                  "example": "2025-10-25 12:00:01"
+                },
+                "status": {
+                  "type": "string",
+                  "example": ""
+                },
+                "valor_total": {
+                  "type": "number",
+                  "example": 39.9
+                }
+              },
+              "required": [
+                "cliente_id",
+                "veiculo_id",
+                "data_abertura",
+                "data_fechamento",
+                "status",
+                "valor_total"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Registro criado com sucesso",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "success"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "Registro criado com sucesso."
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/os/{id}": {
+      "get": {
+        "description": "Busca uma ordem de servico",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retorna uma ordem de servico",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "os_id": {
+                  "type": "number",
+                  "example": 1
+                },
+                "cliente_id": {
+                  "type": "number",
+                  "example": 1
+                },
+                "veiculo_id": {
+                  "type": "number",
+                  "example": 1
+                },
+                "data_abertura": {
+                  "type": "string",
+                  "example": "2025-10-25 12:00:01"
+                },
+                "data_fechamento": {
+                  "type": "string",
+                  "example": "2025-10-25 12:00:01"
+                },
+                "status": {
+                  "type": "string",
+                  "example": ""
+                },
+                "valor_total": {
+                  "type": "number",
+                  "example": 39.9
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "description": "Edita uma ordem de servico",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "obj",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "os_id": {
+                  "type": "number",
+                  "example": 1
+                },
+                "cliente_id": {
+                  "type": "number",
+                  "example": 1
+                },
+                "veiculo_id": {
+                  "type": "number",
+                  "example": 1
+                },
+                "data_abertura": {
+                  "type": "string",
+                  "example": "2025-10-25 12:00:01"
+                },
+                "data_fechamento": {
+                  "type": "string",
+                  "example": "2025-10-25 12:00:01"
+                },
+                "status": {
+                  "type": "string",
+                  "example": ""
+                },
+                "valor_total": {
+                  "type": "number",
+                  "example": 39.9
+                }
+              },
+              "required": [
+                "os_id",
+                "cliente_id",
+                "veiculo_id",
+                "data_abertura",
+                "data_fechamento",
+                "status",
+                "valor_total"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Registro atualizado com sucesso",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "success"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "Registro atualizado com sucesso."
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "description": "Deleta uma ordem de servico",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Registro deletado",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "success"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "Registro deletado com sucesso."
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/pagamentos/": {
+      "get": {
+        "description": "Busca todos os pagamentos",
+        "responses": {
+          "200": {
+            "description": "Retorna lista de pagamentos",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "pagamento_id": {
+                    "type": "number",
+                    "example": 1
+                  },
+                  "os_id": {
+                    "type": "number",
+                    "example": 1
+                  },
+                  "forma_pagamento": {
+                    "type": "string",
+                    "example": "pix"
+                  },
+                  "valor_pago": {
+                    "type": "string",
+                    "example": "49.9"
+                  },
+                  "data_pagamento": {
+                    "type": "string",
+                    "example": "25-09-25"
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "description": "Cria um valor pago ",
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "forma_pagamento": {
+                  "type": "string",
+                  "example": "pix"
+                },
+                "valor_pago": {
+                  "type": "string",
+                  "example": "49.9"
+                },
+                "data_pagamento": {
+                  "type": "string",
+                  "example": "25-09-25"
+                }
+              },
+              "required": [
+                "forma_pagamento",
+                "valor_pago",
+                "data_pagamento"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Registro criado com sucesso",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "success"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "Registro criado com sucesso."
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/pagamentos/{id}": {
+      "get": {
+        "description": "Busca um valor pago",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retorna um valor pago",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "pagamento_id": {
+                  "type": "number",
+                  "example": 1
+                },
+                "os_id": {
+                  "type": "number",
+                  "example": 1
+                },
+                "forma_pagamento": {
+                  "type": "string",
+                  "example": "pix"
+                },
+                "valor_pago": {
+                  "type": "string",
+                  "example": "49.9"
+                },
+                "data_pagamento": {
+                  "type": "string",
+                  "example": "25-09-25"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "description": "Edita um pagamento",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "obj",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "forma_pagamento": {
+                  "type": "string",
+                  "example": "pix"
+                },
+                "valor_pago": {
+                  "type": "string",
+                  "example": "49.9"
+                },
+                "data_pagamento": {
+                  "type": "string",
+                  "example": "25-09-25"
+                }
+              },
+              "required": [
+                "forma_pagamento",
+                "valor_pago",
+                "data_pagamento"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Registro atualizado com sucesso",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "success"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "Registro atualizado com sucesso."
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "description": "Deleta um valor pago",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Registro deletado",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "success"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "Registro deletado com sucesso."
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
