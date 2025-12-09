@@ -18,7 +18,7 @@ router.get('/', async (req, res) => {
     } */
     let oss = await executarsql(`select * from Ordem_servico INNER JOIN veículo ON Ordem_servico.veiculo_id = veículo.veiculo_id INNER JOIN Cliente ON Veículo.cliente_id = Cliente.cliente_id`)
     for (let os of oss) {
-        const Servicos = await executarsql(`select * from itens_os  INNER JOIN serviço ON itens_os.servico_id = serviço.servico_id where os_id = ${os.os_id}`);
+        const Servicos = await executarsql(`select * from itens_os  INNER JOIN servico ON itens_os.servico_id = servico.servico_id where os_id = ${os.os_id}`);
         os.servicos = Servicos;
     }
     res.json(oss);
