@@ -11,7 +11,7 @@ import pagamentoRoutes from "./src/routes/pagamentoRoutes.js"
 
 import swaggerui from "swagger-ui-express";
 
-import swaggeroutput from "./src/docs/swagger-output.json" assert {type:"json"}
+import swaggeroutput from "./src/docs/swagger-output.json" with {type:"json"}
 import { executarsql } from "./src/database/index.js"
 
 const app = express()
