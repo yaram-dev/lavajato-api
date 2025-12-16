@@ -16,7 +16,7 @@ router.get('/', async (req, res) => {
     } */
     const pagamentos = await executarsql(`select * from Pagamento INNER JOIN Ordem_servico ON Pagamento.os_id = Ordem_servico.os_id INNER JOIN Veículo ON Ordem_servico.veiculo_id = Veículo.veiculo_id INNER JOIN Cliente ON Veículo.cliente_id = Cliente.cliente_id`)
     const os = await executarsql(`select count(*) as servicos from Ordem_servico WHERE status = 'concluido'`)
-    const faturamento = await executarsql(`select SUM(valor_pago) as total from pagamento`)
+    const faturamento = await executarsql(`select COALESCE(SUM(valor_pago), 0):: float as total from pagamento`)
     const requisicoes = await Promise.all([pagamentos, os, faturamento])
     if (requisicoes){
         res.json({pagamentos: requisicoes[0], totalServicos: requisicoes[1][0].servicos, faturamento: requisicoes[2][0].total || 0})
@@ -58,10 +58,10 @@ router.post('/', async (req, res) => {
                 description: 'Registro criado com sucesso.',
             }
     } */
-    let resultado = await executarsql(`insert into pagamento (os_id, forma_pagamento, valor_pago, data_pagamento) values ('${req.body.os_id}', '${req.body.forma_pagamento}', '${req.body.valor_pago}', '${req.body.data_pagamento}')`)
+    let resultado = await executarsql(`insert into pagamento (os_id, forma_pagamento, valor_pago, data_pagamento) values ('${req.body.os_id}', '${req.body.forma_pagamento}', ${Number(req.body.valor_pago)}, '${req.body.data_pagamento}')`)
     if (resultado.length == 0) {
         let osUpdate = await executarsql(`update Ordem_servico set status = 'concluido' where os_id = ${req.body.os_id}`)
-        if (osUpdate.rowCount > 0) {
+        if (osUpdate.rowCount > 0) {    
             res.json({
                 tipo: "success",
                 mensagem: "registro criado com sucesso"
