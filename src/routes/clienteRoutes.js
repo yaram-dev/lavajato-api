@@ -62,7 +62,7 @@ router.post('/', async (req, res) => {
     } */
 
     let resultado = await executarsql(`insert into Cliente (nome, cpf, telefone, enderco, email) values ('${req.body.nome}', '${req.body.cpf}', '${req.body.telefone}' , '${req.body.enderco}' , '${req.body.email}')`)
-    if (resultado.affectedRows > 0) {
+    if (resultado.length == 0) {
         res.json({
             tipo: "success",
             mensagem: "registro criado com sucesso"
@@ -110,7 +110,7 @@ router.put('/:id', async (req, res) => {
             cliente.email = req.body.email
         }
         let resultado = await executarsql(`update cliente set nome = '${cliente.nome}', cpf = '${cliente.cpf}', telefone = '${cliente.telefone}' , enderco = '${cliente.enderco}' , email = '${cliente.email}' where cliente_id = ${req.params.id}`)
-        if (resultado.affectedRows > 0) {
+        if (resultado.length == 0) {
             res.json({
                 tipo: "success",
                 mensagem: "registro atualizado com sucesso"
@@ -136,7 +136,7 @@ router.delete('/:id', async (req, res) => {
     } */
 
     let resultado = await executarsql(`delete from Cliente where cliente_id = ${req.params.id}`)
-    if (resultado.affectedRows > 0) {
+    if (resultado.length == 0) {
         res.json({
             tipo: "success",
             mensagem: "registro deletado com sucesso"

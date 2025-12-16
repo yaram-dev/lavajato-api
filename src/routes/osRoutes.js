@@ -63,7 +63,7 @@ router.post('/', async (req, res) => {
     } */
 
     let resultado = await executarsql(`insert into Ordem_servico (cliente_id, veiculo_id, data_abertura, data_fechamento, status, valor_total ) values (${req.body.cliente_id}, ${req.body.veiculo_id}, '${req.body.data_abertura}' , '${req.body.data_fechamento}', '${req.body.status}', ${req.body.valor_total})`)
-    if (resultado.affectedRows > 0) {
+    if (resultado.length == 0) {
         req.body.servicos.map(async (servico) => {
             await executarsql(`insert into itens_os (os_id, servico_id) values (${resultado.insertId}, '${servico}')`)
         })
@@ -117,7 +117,7 @@ router.put('/:id', async (req, res) => {
             ordem.valor_total = req.body.valor_total
         }
         let resultado = await executarsql(`update Ordem_servico set cliente_id = ${ordem.cliente_id}, veiculo_id = ${ordem.veiculo_id}, data_abertura = '${ordem.data_abertura}' , data_fechamento = '${ordem.data_fechamento}' , status = '${ordem.status}', valor_total = ${ordem.valor_total} where os_id = ${req.params.id}`)
-        if (resultado.affectedRows > 0) {
+        if (resultado.length == 0) {
             req.body.servicos.map(async (servico) => {
                 await executarsql(`insert into itens_os (os_id, servico_id) values (${resultado.insertId}, '${servico}')`)
             })
@@ -146,7 +146,7 @@ router.delete('/:id', async (req, res) => {
     } */
 
     let resultado = await executarsql(`delete from Ordem_servico where os_id = ${req.params.id}`)
-    if (resultado.affectedRows > 0) {
+    if (resultado.length == 0) {
         res.json({
             tipo: "success",
             mensagem: "registro deletado com sucesso"

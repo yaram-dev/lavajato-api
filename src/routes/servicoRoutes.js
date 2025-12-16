@@ -47,13 +47,21 @@ router.post('/', async (req, res) => {
                 description: 'Registro criado com sucesso.',
             }
     } */
+    try {
+        let resultado = await executarsql(`insert into servico (nome, descricao, valor_base) values ('${req.body.nome}', '${req.body.descricao}', ${req.body.valor_base})`)
+        if (resultado.length == 0) {
+            res.json({
+                tipo: "success",
+                mensagem: "registro criado com sucesso"
 
-    let resultado = await executarsql(`insert into servico (nome, descricao, valor_base) values ('${req.body.nome}', '${req.body.descricao}', ${req.body.valor_base})`)
-    if (resultado.affectedRows > 0) {
+            })
+            return
+        }
+        res.json(resultado)
+    } catch (error) {
         res.json({
-            tipo: "success",
-            mensagem: "registro criado com sucesso"
-            
+            tipo: "error",
+            mensagem: error.message
         })
     }
 
@@ -90,7 +98,7 @@ router.put('/:id', async (req, res) => {
             servico.valor_base = req.body.valor_base
         }
         let resultado = await executarsql(`update servico set nome = '${servico.nome}', descricao = '${servico.descricao}', valor_base = ${servico.valor_base} where servico_id = ${req.params.id}`)
-        if (resultado.affectedRows > 0) {
+        if (resultado.length == 0) {
             res.json({
                 tipo: "success",
                 mensagem: "registro atualizado com sucesso"
@@ -117,7 +125,7 @@ router.delete('/:id', async (req, res) => {
     try {
         let resultado = await executarsql(`delete from servico where servico_id = ${req.params.id}`)
 
-        if (resultado.affectedRows > 0) {
+        if (resultado.length == 0) {
             res.json({
                 tipo: "success",
                 mensagem: "registro deletado com sucesso"

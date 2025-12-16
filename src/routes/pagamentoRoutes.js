@@ -55,9 +55,9 @@ router.post('/', async (req, res) => {
             }
     } */
     let resultado = await executarsql(`insert into pagamento (os_id, forma_pagamento, valor_pago, data_pagamento) values ('${req.body.os_id}', '${req.body.forma_pagamento}', '${req.body.valor_pago}', '${req.body.data_pagamento}')`)
-    if (resultado.affectedRows > 0) {
+    if (resultado.length == 0) {
         let osUpdate = await executarsql(`update Ordem_servico set status = 'concluido' where os_id = ${req.body.os_id}`)
-        if (osUpdate.affectedRows > 0) {
+        if (osUpdate.rowCount > 0) {
             res.json({
                 tipo: "success",
                 mensagem: "registro criado com sucesso"
@@ -99,7 +99,7 @@ router.put('/:id', async (req, res) => {
 
         }
         let resultado = await executarsql(`update Pagamento set forma_pagamento = '${pagamento.forma_pagamento}', valor_pago = '${pagamento.valor_pago}', data_pagamento = '${pagamento.data_pagamento}' where pagamento_id = ${req.params.id}`)
-        if (resultado.affectedRows > 0) {
+        if (resultado.length == 0) {
             res.json({
                 tipo: "success",
                 mensagem: "registro atualizado com sucesso"
@@ -125,7 +125,7 @@ router.delete('/:id', async (req, res) => {
     } */
 
     let resultado = await executarsql(`delete from Pagamento where pagamento_id = ${req.params.id}`)
-    if (resultado.affectedRows > 0) {
+    if (resultado.length == 0) {
         res.json({
             tipo: "success",
             mensagem: "registro deletado com sucesso"
