@@ -18,7 +18,7 @@ router.get('/', async (req, res) => {
     const os = await executarsql(`select count(*) as servicos from Ordem_servico WHERE status = 'concluido'`)
     const faturamento = await executarsql(`select SUM(valor_pago) as total from pagamento`)
     const requisicoes = await Promise.all([pagamentos, os, faturamento])
-    res.json({pagamentos: requisicoes[0], totalServicos: requisicoes[1][0].servicos, faturamento: requisicoes[2][0].total})
+    res.json({pagamentos: requisicoes[0], totalServicos: requisicoes[1][0].servicos, faturamento: requisicoes[2][0].total || 0})
 })
 
 router.get('/:id', async (req, res) => {
