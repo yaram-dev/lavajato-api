@@ -30,7 +30,7 @@ app.get("/dashboard", async (req, res) => {
     const faturamento = await executarsql(`select SUM(valor_pago) as total from pagamento`)
     const requisicoes = await Promise.all([clientes, veiculos, ordens, faturamento])
     if (requisicoes){
-        res.json({clientes:clientes[0].clientes, veiculos:veiculos[0].veiculos, ordens:ordens[0].ordens, faturamento: faturamento[0].total})
+        res.json({clientes:clientes[0].clientes, veiculos:veiculos[0].veiculos, ordens:ordens[0].ordens, faturamento: faturamento[0].total || 0})
     }
     
 })

@@ -60,8 +60,9 @@ router.post('/', async (req, res) => {
             tipo: "success",
             mensagem: "Veiculo criado com sucesso"
         })
+        return
     }
-
+res.json(resultado)
 })
 
 router.put('/:id', async (req, res) => {

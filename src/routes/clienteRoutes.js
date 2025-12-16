@@ -67,7 +67,9 @@ router.post('/', async (req, res) => {
             tipo: "success",
             mensagem: "registro criado com sucesso"
         })
+        return
     }
+    res.json(resultado)
 
 })
 
